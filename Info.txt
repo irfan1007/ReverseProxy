@@ -1,0 +1,20 @@
+1. Attached zip contains 4 files/folders
+	a. Reverse_Proxy (folder - final Eclipse project)
+	b. SocketTest3 (folder- TCP testing tool)
+	c. RevProxy.bat (Batch file to run)
+	d. RevProxy.jar (runnable jar file used in Batch file)
+	
+2. To run application. Directly run RevProxy.bat file on Windows
+3. Applcation listens on TCP socket (localhost:6789) and forward transformed data to (localhost:6788)
+4. Tag1 starts with char < and ends with >. Anything between < and > is replaced by predefined text "TAG1". < and > is retained in output.
+5. Tag2 starts with char [ and ends with ]. Anything between [ and ] is converted to lowercase. [ and ] is retained in output.
+6. Values in 3,4 and5 above can be configured in proxy.properties file (in Eclipse project). This will need rebuilding of jar.
+7. Default proxy.properties looks like {host=localhost,port=6789,fwd_host=localhost,fwd_port=6788,tag1=<,tag1end=>,tag2=[,tag2end=],tag1text=TAG1}
+8. A JUnit class AllTests.java is included to verify data transformation (no tests for connection)
+9. Application transform the data as per given requirement. Sample input "ABC<XX>DE[Yy]FG<ZZ>HI" -> "ABC<TAG1>DE[yy]FG<TAG1>HI"
+10. Logs are logged using Log4J. Logging level is INFO, can be changed in log4j.properties file
+
+Assumption:
+1. Tag start and end is of type char only
+2. Max input byte array size is 1000 bytes
+3. Max byte between tags (to be transformed) is 200 bytes
